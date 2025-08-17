@@ -7,6 +7,8 @@ defmodule MySystem.Application do
 
   @impl true
   def start(_type, _args) do
+    # TODO: OTel setup
+
     MySystem.LoadControl.set_num_schedulers(1)
 
     children = [

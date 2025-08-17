@@ -1,6 +1,8 @@
 defmodule MySystem.LoadControl do
   use Parent.GenServer
 
+  # TODO: Figure out if there is useful telemetry to collect here?
+
   def start_link(arg),
     do: Parent.GenServer.start_link(__MODULE__, arg, name: __MODULE__)
 

@@ -5,6 +5,8 @@ defmodule Mix.Tasks.MySystem.Upgrade do
   use Mix.Task
 
   def run(_args) do
+    # TODO: Collect telemetry here?
+    # TODO: Or use :net_kernel.monitor_nodes/2?
     Node.start(:"upgrader@127.0.0.1")
     Node.set_cookie(:super_secret)
     Node.connect(:"my_system_1@127.0.0.1")

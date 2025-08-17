@@ -1,2 +1,6 @@
-erlang 27.0
-elixir 1.17.2-otp-27
+# erlang 27.0
+# elixir 1.17.2-otp-27
+
+# TODO: Use 1.19 if/when it comes out?
+elixir 1.18.4-otp-28
+erlang 28.0.2

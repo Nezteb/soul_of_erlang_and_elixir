@@ -1,3 +1,11 @@
+# Telemetry-Driven Development Demo
+
+## TODO
+
+- [ ] Docker compose stack with LGTM stack
+- [ ] Basic OTel span sending to LGTM stack
+- [ ] Every thing else is extra win!
+
 # MySystem
 
 This is updated source code of the demo used in my talk [Soul of Erlang and Elixir](https://www.youtube.com/watch?v=JvBT4XBdoUE). Note that some changes have been made compared to the original demo (the code of which can be found [here](https://github.com/sasa1977/demo_system)).

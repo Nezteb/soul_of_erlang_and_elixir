@@ -8,6 +8,8 @@ defmodule MySystemWeb.Telemetry do
 
   @impl true
   def init(_arg) do
+    # TODO: Update to add any useful telemetry
+
     children = [
       # Telemetry poller will execute the given period measurements
       # every 10_000ms. Learn more here: https://hexdocs.pm/telemetry_metrics
