@@ -3,8 +3,14 @@
 ## TODO
 
 - [ ] Docker compose stack with LGTM stack
+  - [ ] Dockerfile for just this service?
+    - Container per node? Demo system can spin up new nodes dynamically, so maybe just a single basic Docker container.
+    - Also, `--sname` (local) demo or `--name` (distributed) demo?
+      - https://www.erlang.org/doc/system/distributed.html#nodes
 - [ ] Basic OTel span sending to LGTM stack
 - [ ] Every thing else is extra win!
+
+---
 
 # MySystem
 

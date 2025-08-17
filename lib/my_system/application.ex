@@ -5,9 +5,21 @@ defmodule MySystem.Application do
 
   use Application
 
+  require Logger
+
   @impl true
   def start(_type, _args) do
+    config =
+      :my_system
+      |> Application.get_all_env()
+      |> Map.new()
+      |> inspect()
+
+    Logger.info("Starting #{__MODULE__}", config: config)
+
     # TODO: OTel setup
+    :ok = OpentelemetryBandit.setup(opt_in_attrs: [])
+    :ok = OpentelemetryPhoenix.setup(adapter: :bandit)
 
     MySystem.LoadControl.set_num_schedulers(1)
 
