@@ -66,6 +66,7 @@ defmodule MySystemWeb.Telemetry do
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
       # {MySystemWeb, :count_users, []}
+      {MySystemWeb.Telemetry.Measurements, :erlang_system_info, []}
     ]
   end
 end

@@ -1,24 +1,41 @@
+
+
+# TODO: Get docker-compose env vars + mix config for clustering working
+# Docs:
+# - Mix release configuration: https://hexdocs.pm/mix/Mix.Tasks.Release.html#module-customization-and-configuration-summary
+# - Phoenix releases clustering: https://hexdocs.pm/phoenix/releases.html#clustering
+# - Phoenix releases DNS discovery: https://hexdocs.pm/phoenix/releases.html#dns-discovery
+
+x-tdd-node-common: &tdd-node-common
+  build:
+    context: .
+  depends_on:
+    - lgtm
+  environment:
+    - PORT=4000
+    - PHX_HOST=localhost
+    - DNS_CLUSTER_QUERY=host.docker.internal
+    - SECRET_KEY_BASE=ZOO9B3CQWdK/kjQmEFmvukqaXkcFpaH7AJItXjBVADrmMPiNr0ETM28TmH1/xVXj
+    - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
+    # https://hexdocs.pm/opentelemetry_exporter/readme.html#os-environment
+    - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+    - OTEL_EXPORTER_OTLP_ENDPOINT=http://lgtm:4318
+
 services:
   tdd_node_a:
     <<: *tdd-node-common
     ports:
-      - 4000:4000 # http
-    environment:
-      - PORT=4000
+      - 4001:4000
 
   tdd_node_b:
     <<: *tdd-node-common
     ports:
-      - 4001:4001 # http
-    environment:
-      - PORT=4001
+      - 4002:4000
 
   tdd_node_c:
     <<: *tdd-node-common
     ports:
-      - 4002:4002 # http
-    environment:
-      - PORT=4002
+      - 4003:4000
 
   # LGTM includes a collector, so we don't follow example in OTel docs:
   # https://opentelemetry.io/docs/languages/erlang/exporters/#setting-up-the-collector
@@ -36,15 +53,3 @@ services:
 
 volumes:
   lgtm_data:
-
-x-tdd-node-common: &tdd-node-common
-  build:
-    context: .
-  depends_on:
-    - lgtm
-  environment:
-    - SECRET_KEY_BASE=ZOO9B3CQWdK/kjQmEFmvukqaXkcFpaH7AJItXjBVADrmMPiNr0ETM28TmH1/xVXj
-    - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
-    # https://hexdocs.pm/opentelemetry_exporter/readme.html#os-environment
-    - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
-    - OTEL_EXPORTER_OTLP_ENDPOINT=http://lgtm:4318

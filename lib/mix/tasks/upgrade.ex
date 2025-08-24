@@ -1,14 +1,16 @@
 defmodule Mix.Tasks.MySystem.Upgrade do
-  # Mix.Task behaviour is not in PLT since Mix is not a runtime dep, so we disable the warning
-  @dialyzer :no_undefined_callbacks
+  @moduledoc false
 
   use Mix.Task
 
+  # TODO: Doing live upgrades might not be easily doable with the distributed erlang setup?
   def run(_args) do
     # TODO: Collect telemetry here?
     # TODO: Or use :net_kernel.monitor_nodes/2?
     Node.start(:"upgrader@127.0.0.1")
     Node.set_cookie(:super_secret)
+
+    # TODO: Update node connection? Which node will it connect to?
     Node.connect(:"my_system_1@127.0.0.1")
 
     Enum.each(

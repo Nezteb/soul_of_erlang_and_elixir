@@ -15,7 +15,7 @@ defmodule MySystem.Application do
       |> Map.new()
       |> inspect()
 
-    Logger.info("Starting #{__MODULE__}", config: config)
+    Logger.info("Starting #{__MODULE__}", config: config, env: inspect(System.get_env()))
 
     # TODO: OTel setup
     :ok = OpentelemetryBandit.setup(opt_in_attrs: [])
@@ -24,6 +24,7 @@ defmodule MySystem.Application do
     MySystem.LoadControl.set_num_schedulers(1)
 
     children = [
+      MySystem.ClusterMonitor,
       MySystem.LoadControl,
       MySystemWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:my_system, :dns_cluster_query) || :ignore},

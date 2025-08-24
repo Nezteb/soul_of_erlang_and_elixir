@@ -1,4 +1,6 @@
 defmodule MySystemWeb.Math do
+  @moduledoc false
+
   use MySystemWeb, :live_view
 
   @impl Phoenix.LiveView

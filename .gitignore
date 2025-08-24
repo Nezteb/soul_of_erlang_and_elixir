@@ -1,3 +1,5 @@
+temp*.md
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 
@@ -36,4 +38,3 @@ npm-debug.log
 /assets/node_modules/
 
 priv/static/favicon-*.ico
-

@@ -1,4 +1,6 @@
 defmodule MySystem.Math do
+  @moduledoc false
+
   use Parent.Supervisor
 
   def start_link(_arg),

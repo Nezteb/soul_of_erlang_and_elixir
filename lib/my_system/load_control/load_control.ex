@@ -1,4 +1,6 @@
 defmodule MySystem.LoadControl do
+  @moduledoc false
+
   use Parent.GenServer
 
   # TODO: Figure out if there is useful telemetry to collect here?
@@ -12,17 +14,17 @@ defmodule MySystem.LoadControl do
     :ok
   end
 
-  def target_load, do: get_value(:target_load)
+  def target_load(), do: get_value(:target_load)
 
   def set_num_schedulers(num) do
     :erlang.system_flag(:schedulers_online, num)
     :erlang.system_flag(:dirty_cpu_schedulers_online, num)
   end
 
-  def num_schedulers,
+  def num_schedulers(),
     do: :erlang.system_info(:schedulers_online)
 
-  def subscribe do
+  def subscribe() do
     Registry.register(__MODULE__.Notifications, :subscriber, nil)
     :ok
   end
@@ -115,7 +117,7 @@ defmodule MySystem.LoadControl do
     value
   end
 
-  defp run_success_reporter do
+  defp run_success_reporter() do
     now = :erlang.monotonic_time()
 
     Stream.iterate(
@@ -142,17 +144,16 @@ defmodule MySystem.LoadControl do
     |> Stream.run()
   end
 
-  defp local_load do
+  defp local_load() do
     num_nodes =
       Node.list([:this, :visible])
       |> Enum.map(&to_string/1)
-      |> Enum.filter(&(&1 =~ ~r/^my_system_\d+@/))
-      |> Enum.count()
+      |> Enum.count(&(&1 =~ ~r/^my_system_\d+@/))
 
     round(target_load() / max(num_nodes, 1))
   end
 
-  defp run_cluster_load do
+  defp run_cluster_load() do
     with {:ok, nodes} <- :erl_epmd.names(~c"127.0.0.1") do
       nodes =
         for {node_name, _epmd_port} <- nodes,

@@ -177,11 +177,10 @@ defmodule MySystemWeb.LoadControl do
     assigns.points
     |> moving_averages(10)
     |> Enum.with_index(1)
-    |> Enum.map(fn {value, pos} ->
+    |> Enum.map_join(" ", fn {value, pos} ->
       x = assigns.width - pos
       "#{x},#{y(value, assigns.height)}"
     end)
-    |> Enum.join(" ")
   end
 
   defp moving_averages(values, size) do

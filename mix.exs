@@ -10,7 +10,8 @@ defmodule MySystem.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      releases: releases()
+      releases: releases(),
+      dialyzer: [plt_add_apps: [:mix]]
     ]
   end
 
@@ -94,6 +95,7 @@ defmodule MySystem.MixProject do
     ]
   end
 
+  # TODO: Maybe change to account for multiple nodes?
   defp releases,
     do: [my_system: [cookie: "super_secret"]]
 

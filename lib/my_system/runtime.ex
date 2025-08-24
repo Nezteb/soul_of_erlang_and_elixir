@@ -1,4 +1,6 @@
 defmodule Runtime do
+  @moduledoc false
+
   def trace(pid) do
     Task.async(fn ->
       :erlang.trace(pid, true, [:call])
