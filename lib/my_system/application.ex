@@ -18,6 +18,7 @@ defmodule MySystem.Application do
     Logger.info("Starting #{__MODULE__}", config: config, env: inspect(System.get_env()))
 
     # TODO: OTel setup
+    # "file=/app/deps/opentelemetry/src/otel_exporter.erl mfa=:otel_exporter.init/1 [warning] OTLP exporter failed to initialize with exception :error:{:badmatch, {:error, :inets_not_started}}
     :ok = OpentelemetryBandit.setup(opt_in_attrs: [])
     :ok = OpentelemetryPhoenix.setup(adapter: :bandit)
 

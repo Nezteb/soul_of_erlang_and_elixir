@@ -23,7 +23,11 @@ end
 if config_env() == :prod do
   config :my_system, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
-  config :my_system, MySystemWeb.Endpoint, url: [host: "localhost", scheme: "http"]
+  host = System.get_env("PHX_HOST", "localhost")
+  port = System.get_env("PORT", "4000")
+
+  config :my_system, MySystemWeb.Endpoint, url: [host: host, port: port]
+  # url: [host: host, port: 443]
 
   # ## SSL Support
   #

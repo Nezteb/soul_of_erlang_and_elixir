@@ -1,7 +1,7 @@
-
-
 # TODO: Get docker-compose env vars + mix config for clustering working
 # Docs:
+# - Docker Compose spec: https://docs.docker.com/reference/compose-file/services/
+# - Distributed Erlang docs: https://www.erlang.org/doc/system/distributed.html
 # - Mix release configuration: https://hexdocs.pm/mix/Mix.Tasks.Release.html#module-customization-and-configuration-summary
 # - Phoenix releases clustering: https://hexdocs.pm/phoenix/releases.html#clustering
 # - Phoenix releases DNS discovery: https://hexdocs.pm/phoenix/releases.html#dns-discovery
@@ -24,18 +24,30 @@ x-tdd-node-common: &tdd-node-common
 services:
   tdd_node_a:
     <<: *tdd-node-common
+    hostname: tdd_node_a.host.docker.internal
+    environment:
+      - PORT=4001
+      - PHX_HOST=tdd_node_a.host.docker.internal
     ports:
-      - 4001:4000
+      - 4001:4001
 
   tdd_node_b:
     <<: *tdd-node-common
+    hostname: tdd_node_b.host.docker.internal
+    environment:
+      - PORT=4002
+      - PHX_HOST=tdd_node_b.host.docker.internal
     ports:
-      - 4002:4000
+      - 4002:4002
 
   tdd_node_c:
     <<: *tdd-node-common
+    hostname: tdd_node_c.host.docker.internal
+    environment:
+      - PORT=4003
+      - PHX_HOST=tdd_node_b.host.docker.internal
     ports:
-      - 4003:4000
+      - 4003:4003
 
   # LGTM includes a collector, so we don't follow example in OTel docs:
   # https://opentelemetry.io/docs/languages/erlang/exporters/#setting-up-the-collector

@@ -10,7 +10,9 @@ defmodule MySystemWeb.Endpoint do
         %{"suffix" => suffix} -> String.to_integer(suffix)
       end
 
-    super([http: [port: 4000 + suffix - 1]] ++ opts)
+    # TODO: Change port to pull from Application env
+    port = System.get_env("PORT", "4000")
+    super([http: [port: port + suffix - 1]] ++ opts)
   end
 
   # The session will be stored in the cookie and signed,

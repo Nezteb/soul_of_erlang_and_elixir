@@ -1,12 +1,19 @@
 # Telemetry-Driven Development Demo
 
+- http://localhost:4000/
+- http://localhost:4000/dashboard/load_control
+- http://localhost:4000/dashboard/metrics
+- http://localhost:4000/dashboard/processes
+- https://www.tldraw.com/
+
 ## TODO
 
 - [ ] Docker compose stack with LGTM stack
-  - [ ] Dockerfile for just this service?
+  - [X] Dockerfile for just this service?
     - Container per node? Demo system can spin up new nodes dynamically, so maybe just a single basic Docker container.
-    - Also, `--sname` (local) demo or `--name` (distributed) demo?
-      - https://www.erlang.org/doc/system/distributed.html#nodes
+  - [ ] Figure out how to get DNS Cluster working locally with Docker Compose? https://docs.docker.com/desktop/features/networking/
+    - https://elixirforum.com/t/using-dns-cluster-with-docker-compose-locally-it-can-be-done/61336
+    - https://github.com/igin/elixir_phoenix_compose_cluster_demo
 - [ ] Basic OTel span sending to LGTM stack
 - [ ] Every thing else is extra win!
 

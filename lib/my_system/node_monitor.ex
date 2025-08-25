@@ -2,12 +2,12 @@ defmodule MySystem.ClusterMonitor do
   @moduledoc """
   TODO: Docs explaining that only leader node reports telemetry.
 
-  Modified version of SmartRent's cluster setup, which I attribute
-  primarily to:
+  Modified version of SmartRent's cluster setup, which I attribute primarily to:
   - Kawika Kekahuna (Senior Software Engineer II @ SmartRent)
   - Jon Carstens (Director of Engineering @ SmartRent)
-  - I helped a bit.
+  - Noah helped a bit
   """
+
   use GenServer
   require Logger
 
